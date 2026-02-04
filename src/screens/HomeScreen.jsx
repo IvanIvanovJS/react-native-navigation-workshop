@@ -4,7 +4,11 @@ import FeaturedCard from "../components/FeaturedCard";
 import { categories } from "../../data/categoriesData";
 import CategoryCard from "../components/CategoryCard";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+  const categoryPressHandler = (categoryId) => {
+    navigation.navigate("Category", { categoryId });
+  };
+
   return (
     <ScrollView>
       <View style={styles.header}>
@@ -18,6 +22,7 @@ export default function HomeScreen() {
           Fresh & Delicious Food Delivered Fast
         </Text>
       </View>
+
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Featured Items</Text>
         <ScrollView horizontal style={styles.featuredList}>
@@ -34,7 +39,12 @@ export default function HomeScreen() {
         {categories.map((category) => {
           const itemCount = getItemsByCategory(category.id).length;
           return (
-            <CategoryCard key={category.id} {...category} count={itemCount} />
+            <CategoryCard
+              key={category.id}
+              {...category}
+              count={itemCount}
+              onPress={categoryPressHandler}
+            />
           );
         })}
       </View>
