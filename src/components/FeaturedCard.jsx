@@ -1,8 +1,8 @@
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet, Image, Text, TouchableOpacity } from "react-native";
 
-export default function FeaturedCard({ name, imageUrl, price }) {
+export default function FeaturedCard({ id, name, imageUrl, price, onPress }) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => onPress(id)}>
       <Image
         source={{ uri: imageUrl }}
         style={styles.image}
@@ -13,7 +13,7 @@ export default function FeaturedCard({ name, imageUrl, price }) {
         <Text style={styles.title}>{name}</Text>
         <Text style={styles.price}>{price}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
