@@ -1,11 +1,15 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getItemById } from "../../data/menuItems";
 import Button from "../components/Button";
+import { useState } from "react";
 
 export default function DetailsScreen({ route }) {
+  const [qty, setQty] = useState(1);
+
   const id = route.params.itemId;
-  const { name, imageUrl, price, quantity = 1, description } = getItemById(id);
-  const finalPrice = quantity * price;
+  const { name, imageUrl, price, description } = getItemById(id);
+  const finalPrice = qty * price;
+
   return (
     <View style={styles.container}>
       <Image
@@ -21,7 +25,27 @@ export default function DetailsScreen({ route }) {
         <Text style={styles.divider}></Text>
         <View style={styles.qtySection}>
           <Text style={styles.qtyLabel}>Quantity</Text>
-          <Text> - 1 + </Text>
+          <Text>
+            <TouchableOpacity
+              disabled={qty == 0}
+              onPress={() =>
+                setQty((state) => {
+                  return state - 1;
+                })
+              }
+              style={{ fontWeight: "bold" }}
+            >
+              -{" "}
+            </TouchableOpacity>{" "}
+            {qty}{" "}
+            <TouchableOpacity
+              style={{ fontWeight: "bold" }}
+              onPress={() => setQty((state) => state + 1)}
+            >
+              {" "}
+              +
+            </TouchableOpacity>
+          </Text>
         </View>
       </View>
 
