@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeNavigator from "./HomeNavigator";
 
 import { Ionicons } from "@expo/vector-icons";
+import CartScreen from "../screens/CartScreen";
+import InfoScreen from "../screens/InfoScreen";
 
 export default function RootNavigator() {
   const Tabs = createBottomTabNavigator();
@@ -20,6 +22,8 @@ export default function RootNavigator() {
           headerShown: false,
         }}
       />
+      <Tabs.Screen name="Cart" component={CartScreen} />
+      <Tabs.Screen name="Info" component={InfoScreen} />
     </Tabs.Navigator>
   );
 }
